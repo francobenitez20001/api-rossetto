@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const validatorParams = require('../middlewares/validatorParams');
 const {verifyToken,verifyAdminUser} = require('../middlewares/auth');
-const { check } = require('express-validator');
 const inmuebleController = require('../controllers/inmuebleController');
 
 
 router.get("/",inmuebleController.getAll);
 
-router.get("/:id",inmuebleController.findById);
-
 router.get("/filtrar",inmuebleController.filtrar);
+
+router.get("/:id",inmuebleController.findById);
 
 router.post("/",verifyToken,verifyAdminUser,inmuebleController.create);
 
