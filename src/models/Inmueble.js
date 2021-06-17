@@ -35,6 +35,9 @@ class InmuebleModel{
             query += `FROM ${config.dbName}.rs_inmuebles_todas WHERE 1=1 `;
         }
         if(filtros){
+            if(filtros.idPartido){
+                query += `AND ID_PARTIDO = ${filtros.idPartido} `;
+            }
             if(filtros.idCiudad){
                 query += `AND ID_CIUDAD = ${filtros.idCiudad} `;
             }

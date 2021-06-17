@@ -26,6 +26,7 @@ exports.getAll = async(req,res)=>{
 exports.filtrar = async (req,res)=>{
     const inmuebleService = new InmuebleService();
     try {
+        const idPartido = req.query.idPartido || null;
         const idCiudad = req.query.idCiudad || null;
         const idBarrio = req.query.idBarrio || null;
         const idCategoria = req.query.idCategoria || null;
@@ -35,6 +36,7 @@ exports.filtrar = async (req,res)=>{
         const minPrecio = req.query.minPrecio || null;
         const maxPrecio = req.query.maxPrecio || null;
         const filtros = {
+            idPartido,
             idCiudad,
             idBarrio,
             idCategoria,
