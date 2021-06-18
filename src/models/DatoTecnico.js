@@ -22,7 +22,7 @@ class DatoTecnicoModel{
 
     create(body,idInmueble){
         return new Promise((resolve,reject)=>{
-            db.query(`CALL SP_DT_INS_UPD(0,${idInmueble},${body.dormitorios},${body.cochera},${body.pileta},'${body.s_total}','${body.s_cubierta}','${body.u_medida}')`,(err,res,fields)=>{
+            db.query(`CALL SP_DT_INS_UPD(0,${idInmueble},${body.dormitorios},${body.cochera},${body.pileta},'${body.s_total}','${body.s_cubierta}','${body.u_medida}',${body.baños})`,(err,res,fields)=>{
                 if(err) reject(err);
                 resolve(res);
             })
@@ -31,7 +31,7 @@ class DatoTecnicoModel{
 
     update(body,idInmueble){
         return new Promise((resolve,reject)=>{
-            db.query(`CALL SP_DT_INS_UPD(${idInmueble},${idInmueble},${body.dormitorios},${body.cochera},${body.pileta},'${body.s_total}','${body.s_cubierta}','${body.u_medida}')`,(err,res,fields)=>{
+            db.query(`CALL SP_DT_INS_UPD(${idInmueble},${idInmueble},${body.dormitorios},${body.cochera},${body.pileta},'${body.s_total}','${body.s_cubierta}','${body.u_medida}',${body.baños})`,(err,res,fields)=>{
                 if(err) reject(err);
                 resolve(res);
             })
