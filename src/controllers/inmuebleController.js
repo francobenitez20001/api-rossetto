@@ -6,9 +6,15 @@ const ServiciosService = require('../services/ServicioService');
 exports.getAll = async(req,res)=>{
     const inmuebleService = new InmuebleService();
     try {
-        const {query:{cantidad,order,desde}} = req;
+        const {query:{cantidad,order,desde,destacada}} = req;
+        let filtro = null;
+        if(destacada && destacada == "1"){//objeto para traer destacadas
+            filtro = {
+                destacada:true
+            }
+        }
         const admin = req.header('x-auth-token') ? 1 : 0;
-        const inmuebles = await inmuebleService.getAll(admin,desde,cantidad,order,null);
+        const inmuebles = await inmuebleService.getAll(admin,desde,cantidad,order,filtro);
         res.status(200).json({
             ok:true,
             inmuebles

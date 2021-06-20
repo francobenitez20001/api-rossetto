@@ -53,6 +53,9 @@ class InmuebleModel{
             if(filtros.moneda){
                 query += `AND MONEDA_PROPIEDAD = '${filtros.moneda}' `;
             }
+            if(filtros.destacada){
+                query += `AND DESTACADA = 1 `;
+            }
             if(filtros.minPrecio && filtros.maxPrecio){
                 query += `AND PRECIO BETWEEN ${filtros.minPrecio} AND ${filtros.maxPrecio} `;
             }
@@ -84,7 +87,7 @@ class InmuebleModel{
 
     create(body){
         return new Promise((resolve,reject)=>{
-            db.query("CALL SP_INMUEBLES_INS_UPD(0,?, ? , ?, ?, ? , ?, ?, ?, ?, ?, ?,0)",
+            db.query("CALL SP_INMUEBLES_INS_UPD(0,?, ? , ?, ?, ? , ?, ?, ?, ?, ?, ?,?,0)",
             [
                 body.idOperacion,
                 body.idCategoria,
@@ -96,7 +99,8 @@ class InmuebleModel{
                 body.estado,
                 body.moneda,
                 body.precio,
-                body.mostrarEstado
+                body.mostrarEstado,
+                body.destacada
             ],(err,res,fields)=>{
                 if(err) reject(err);
                 db.query(`SELECT MAX(ID_INMUEBLE) as ID_INMUEBLE FROM ${config.dbName}.rs_inmuebles_todas`,(error, filas, celdas) => {
@@ -112,7 +116,7 @@ class InmuebleModel{
 
     update(body,id){
         return new Promise((resolve,reject)=>{
-            db.query("CALL SP_INMUEBLES_INS_UPD(?,?, ? , ?, ?, ? , ?, ?, ?, ?, ?, ?,0)",
+            db.query("CALL SP_INMUEBLES_INS_UPD(?,?, ? , ?, ?, ? , ?, ?, ?, ?, ?, ?, ?,0)",
             [
 	            id,
                 body.idOperacion,
@@ -125,7 +129,8 @@ class InmuebleModel{
                 body.estado,
                 body.moneda,
                 body.precio,
-                body.mostrarEstado
+                body.mostrarEstado,
+                body.destacada
             ],(err,res,fields)=>{
                 if(err) reject(err);
                 resolve(res);

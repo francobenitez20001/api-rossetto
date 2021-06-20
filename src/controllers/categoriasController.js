@@ -1,4 +1,5 @@
 const CategoriaService = require('../services/CategoriaService');
+const CloudStorage = require('../services/CloudStorage');
 
 exports.getAll = async(req,res)=>{
     const categoriaService = new CategoriaService();
@@ -57,9 +58,12 @@ exports.findByNombre = async (req,res)=>{
 }
 
 exports.create = async (req,res)=>{
+    const cs = new CloudStorage();
     const categoriaService = new CategoriaService();
     try {
+        const link = await cs.upload(req.file);
         const {body} = req;
+        body.foto = link;
         const createCategoria = await categoriaService.create(body);
         res.status(200).json({
             ok:true,
@@ -79,6 +83,12 @@ exports.update = async (req,res)=>{
     const categoriaService = new CategoriaService();
     try {
         const {body,params:{id}} = req;
+        body.foto = null;
+        if(req.file){
+            const cs = new CloudStorage();
+            const link = await cs.upload(req.file);
+            body.foto = link;
+        }
         const updateCategoria = await categoriaService.update(body,id);
         res.status(200).json({
             ok:true,

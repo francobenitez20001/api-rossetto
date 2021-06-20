@@ -32,7 +32,7 @@ class CategoriaModel{
 
     create(body){
         return new Promise((resolve,reject)=>{
-            db.query(`CALL SP_CATEGORIAS_INS_UPD(0,'${body.categoria}')`,(err,res,fields)=>{
+            db.query(`CALL SP_CATEGORIAS_INS_UPD(0,'${body.categoria}','${body.foto}')`,(err,res,fields)=>{
                 if(err) reject(err);
                 resolve(res);
             })
@@ -41,7 +41,7 @@ class CategoriaModel{
 
     update(body,id){
         return new Promise((resolve,reject)=>{
-            db.query(`CALL SP_CATEGORIAS_INS_UPD(${id},'${body.categoria}')`,(err,res,fields)=>{
+            db.query(`CALL SP_CATEGORIAS_INS_UPD(${id},'${body.categoria}','${body.foto}')`,(err,res,fields)=>{
                 if(err) reject(err);
                 resolve(res);
             })

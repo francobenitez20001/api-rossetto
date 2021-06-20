@@ -4,6 +4,7 @@ const router =  express.Router();
 const categoriasController = require('../controllers/categoriasController');
 const validatorParams = require('../middlewares/validatorParams');
 const {verifyToken,verifyAdminUser} = require('../middlewares/auth');
+const multer = require('../lib/multer');
 
 router.get("/",categoriasController.getAll);
 
@@ -13,11 +14,11 @@ router.get("/search",categoriasController.findByNombre);
 
 router.post("/",[
   check('categoria','La categoria es obligatoria').isString()
-],validatorParams,verifyToken,verifyAdminUser,categoriasController.create);
+],validatorParams,multer.single('foto'),verifyToken,verifyAdminUser,categoriasController.create);
 
 router.put("/:id",[
   check('categoria','La categoria es obligatoria').isString()
-],validatorParams,verifyToken,verifyAdminUser,categoriasController.update);
+],validatorParams,multer.single('foto'),verifyToken,verifyAdminUser,categoriasController.update);
 
 router.delete("/:id",verifyToken,verifyAdminUser,categoriasController.delete);
 
