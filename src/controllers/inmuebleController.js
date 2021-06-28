@@ -7,6 +7,12 @@ exports.getAll = async(req,res)=>{
     const inmuebleService = new InmuebleService();
     try {
         const {query:{cantidad,order,desde,destacada}} = req;
+        if(!cantidad || !order || !desde){
+            return res.status(400).json({
+                ok:false,
+                error:'Faltan parametros en la consulta'
+            })
+        }
         let filtro = null;
         if(destacada && destacada == "1"){//objeto para traer destacadas
             filtro = {
@@ -54,6 +60,12 @@ exports.filtrar = async (req,res)=>{
         }
         const admin = req.header('x-auth-token') ? 1 : 0;
         const {query:{cantidad,order,desde}} = req;
+        if(!cantidad || !order || !desde){
+            return res.status(400).json({
+                ok:false,
+                error:'Faltan parametros en la consulta'
+            })
+        }
         const inmuebles = await inmuebleService.getAll(admin,desde,cantidad,order,filtros);
         if(inmuebles.length === 0){
             res.status(200).json({
