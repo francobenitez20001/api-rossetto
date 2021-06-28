@@ -36,9 +36,7 @@ exports.sendEmail = async (req,res)=>{
         };
         nodemailer.send(mailOptions).then(result=>{
             res.status(200).json({
-                ok:true,
-                msg:'Enviado',
-                info:result
+                ok:true
             })
         }).catch(err=>{
             res.status(500).json({
