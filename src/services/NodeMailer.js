@@ -6,13 +6,16 @@ class Nodemailer{
         this.transporter = nodemailer.createTransport({
             host:config.ACCOUNT_HOST,
             port:config.ACCOUNT_PORT,
-            segure:true,
+            secure:true,
             service:'gmail',
             auth:{
                 user:config.ACCOUNT_USERNAME,
                 pass:config.ACCOUNT_PASSWORD
             }
         });
+        this.transporter.verify().then(()=>{
+            console.log('Transporter configurado');
+        })
     }
 
     send(mailOptions){

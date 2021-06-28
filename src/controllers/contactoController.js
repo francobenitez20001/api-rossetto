@@ -23,7 +23,7 @@ exports.getInfo = async(req,res)=>{
 exports.sendEmail = async (req,res)=>{
     try {
         const {body} = req;
-        let text = `${body.nombre} <${body.email}> \n ${body.mensaje}`;
+        let text = `${body.nombre} ${body.apellido} <${body.email}> \n ${body.mensaje}`;
         if(req.body.propiedad){
             text = `${body.nombre} <${body.email}> \n Propiedad: ${req.body.propiedad} \n ${body.mensaje}`
         }
@@ -31,7 +31,7 @@ exports.sendEmail = async (req,res)=>{
         const mailOptions={
             from:body.nombre,
             to:`${config.FROM_USERNAME}`,
-            subject:body.asunto,
+            subject:'Consulta desde pagina web',
             text
         };
         nodemailer.send(mailOptions).then(result=>{

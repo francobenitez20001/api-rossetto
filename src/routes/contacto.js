@@ -23,10 +23,10 @@ router.put('/:id',[
     check('direccion','direccion obligatoria').isString()
 ],validatorParams,verifyToken,verifyAdminUser,contactoController.update);
 
-// router.post('/sendMail',[
-//     check('nombre','El nombre es obligatorio').isString(),
-//     check('email','El email es obligatorio').isString(),
-//     check('mensaje','El mensaje es obligatorio').isString()
-// ],validatorParams,contactoController.sendEmail);
+router.post('/sendMail',[
+    check('nombre','El nombre es obligatorio').isString(),
+    check('email','El email es obligatorio').isString(),
+    check('mensaje','El mensaje es obligatorio').isString()
+],validatorParams,contactoController.sendEmail);
 
 module.exports = router;
