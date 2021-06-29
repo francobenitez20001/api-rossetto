@@ -4,7 +4,7 @@ const {format} = require('util');
 const {config} = require('../../config/index');
 
 const googleCloud = new Storage({
-  keyFilename:path.join(__dirname,'../../google-cloud-settings.json'),
+  keyFilename:path.join(__dirname,'../../credenciales-google.json'),
   projectId:config.idProjectGoogleCloud
 });
 
@@ -14,7 +14,7 @@ class CloudStorage{
 
     upload(file){
         return new Promise((resolve,reject)=>{
-            const blob = bucket.file(`rossetto/${file.originalname}`);
+            const blob = bucket.file(`${file.originalname}`);
             const blobStream = blob.createWriteStream();
             blobStream.on('error', (err) => {
                 //console.log(err);
