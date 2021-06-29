@@ -1,4 +1,3 @@
 node_modules
 database/db.sql
 .env
-credenciales-google.json
