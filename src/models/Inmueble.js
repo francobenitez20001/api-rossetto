@@ -25,7 +25,7 @@ class InmuebleModel{
         DORMITORIOS,
         IF(COCHERA=1 ,'SI','NO') AS COCHERA,
         IF(PILETA=1 ,'SI','NO') AS PILETA,
-        SUPERFICIE_TOTAL,
+        SUPERFICIE_TERRENO,
         SUPERFICIE_CUBIERTA,
         UNIDAD_MEDIDA,
         HEADER `;
